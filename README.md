@@ -1,4 +1,4 @@
-# 🎀 Femboy Style Userbot
+# 🎀 Style Userbot
 
 Telegram-юзербот на [Telethon](https://github.com/LonamiWebs/Telethon), который **автоматически меняет стиль твоих исходящих сообщений**. Ты пишешь «Привет», а собеседник видит «приветик ✨». Работает от твоего аккаунта, нейросети не использует и токены не тратит: всё делается по правилам (замена слов, регулярные выражения и немного случайности).
 
@@ -46,7 +46,7 @@ Telegram-юзербот на [Telethon](https://github.com/LonamiWebs/Telethon),
 └── README.md
 ```
 
-`femboy_userbot_proxy.py` и `femboy_core_ru.py` должны лежать в одной папке.
+`style_userbot_proxy.py` и `style_core_ru.py` должны лежать в одной папке.
 
 ---
 
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 2. Выбери **API development tools** и создай приложение (название любое, платформа Desktop).
 3. Скопируй `api_id` и `api_hash`.
 
-### 2. Впиши данные в `femboy_userbot_proxy.py`
+### 2. Впиши данные в `style_userbot_proxy.py`
 
 ```python
 API_ID = 12345678
@@ -78,13 +78,13 @@ API_HASH = "твой_api_hash"
 Если Telegram у тебя работает без прокси, в файле удали блок с `connection=` и `proxy=` и оставь простое:
 
 ```python
-client = TelegramClient("femboy", API_ID, API_HASH)
+client = TelegramClient("style", API_ID, API_HASH)
 ```
 
 Для MTProto-прокси впиши адрес, порт и секрет:
 
 ```python
-PROXY_HOST = "127.0.0.1"
+PROXY_HOST = ""
 PROXY_PORT = 1080
 PROXY_SECRET = "секрет_из_32_символов"
 ```
@@ -94,7 +94,7 @@ PROXY_SECRET = "секрет_из_32_символов"
 ### 4. Запусти
 
 ```bash
-python femboy_userbot_proxy.py
+python style_userbot_proxy.py
 ```
 
 При первом запуске введи **свой номер телефона** (не токен бота!) и код из Telegram. В папке появится файл `femboy.session`.
@@ -110,7 +110,7 @@ pip install qrcode[pil]
 python qr_login.py
 ```
 
-Откроется картинка с QR. На телефоне: **Настройки → Устройства → Подключить устройство**, наведи камеру на QR. Скрипт использует настройки (API и прокси) из `femboy_userbot_proxy.py`.
+Откроется картинка с QR. На телефоне: **Настройки → Устройства → Подключить устройство**, наведи камеру на QR. Скрипт использует настройки (API и прокси) из `style_userbot_proxy.py`.
 
 ---
 
@@ -122,25 +122,25 @@ python qr_login.py
 | `TimeoutError` / `Server closed the connection` | Telegram недоступен: включи VPN на всём устройстве или настрой прокси |
 | Команды ничего не делают | Скрипт вошёл как бот (ввели токен вместо номера). Удали `femboy.session` и войди по номеру |
 | `database is locked` / `AuthKeyDuplicatedError` | Тот же `.session` используется другим запущенным скриптом. Смени имя сессии в `TelegramClient("...")` |
-| `ModuleNotFoundError: femboy_core_ru` | Файлы лежат в разных папках |
+| `ModuleNotFoundError: style_core_ru` | Файлы лежат в разных папках |
 | Код не приходит | Он приходит в чат «Telegram» внутри приложения. Или используй `qr_login.py` |
 
 ---
 
 ## Версии с обычным ботом
 
-`femboy_bot.py` (EN) и `femboy_bot_ru.py` (RU) работают через [python-telegram-bot](https://python-telegram-bot.org/) и токен от @BotFather. Бот пишет в личке и умеет inline-режим (`@бот текст` в любом чате). В них есть только фембой-стиль.
+`style_bot.py` (EN) и `style_bot_ru.py` (RU) работают через [python-telegram-bot](https://python-telegram-bot.org/) и токен от @BotFather. Бот пишет в личке и умеет inline-режим (`@бот текст` в любом чате). В них есть только фембой-стиль.
 
 ```bash
 export BOT_TOKEN="токен_от_BotFather"
-python femboy_bot_ru.py
+python style_bot_ru.py
 ```
 
 ---
 
 ## Безопасность
 
-- **Никогда не коммить** `API_HASH`, файлы `*.session`, токен бота и секрет прокси. Файл `*.session` даёт полный доступ к аккаунту. Перед `git push` проверь, что в `femboy_userbot_proxy.py` стоят заглушки вместо твоих данных.
+- **Никогда не коммить** `API_HASH`, файлы `*.session`, токен бота и секрет прокси. Файл `*.session` даёт полный доступ к аккаунту. Перед `git push` проверь, что в `style_userbot_proxy.py` стоят заглушки вместо твоих данных.
 - Если токен или ключ случайно попали в публичный репозиторий, считай их скомпрометированными: токен бота пересоздай через `/revoke` в @BotFather, а сессию заверши в Telegram (Настройки → Устройства).
 - Не отправляй QR-код и код входа никому.
 
@@ -150,7 +150,7 @@ python femboy_bot_ru.py
 
 ## Настройка стиля
 
-Все фразы и вероятности лежат в `femboy_core_ru.py`:
+Все фразы и вероятности лежат в `style_core_ru.py`:
 
 - `PRESETS`: как часто срабатывают эффекты (число от 0 до 1);
 - `EMOTICONS`, `EMOJIS`, `ACTIONS`, `FILLERS`: смайлики, действия, вставки;
