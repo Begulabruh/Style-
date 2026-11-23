@@ -37,11 +37,11 @@ Telegram-юзербот на [Telethon](https://github.com/LonamiWebs/Telethon),
 ## Структура проекта
 
 ```
-├── femboy_userbot_proxy.py   # юзербот (с поддержкой MTProto-прокси)
-├── femboy_core_ru.py         # логика всех стилей (без зависимостей от Telegram)
+├── style_userbot_proxy.py   # юзербот (с поддержкой MTProto-прокси)
+├── style_core_ru.py         # логика всех стилей (без зависимостей от Telegram)
 ├── qr_login.py               # вход по QR-коду, если код из Telegram не приходит
-├── femboy_bot_ru.py          # обычный бот (Bot API), только фембой-стиль, русский
-├── femboy_bot.py             # обычный бот (Bot API), только фембой-стиль, английский
+├── style_bot_ru.py          # обычный бот (Bot API), только стиль, русский
+├── style_bot.py             # обычный бот (Bot API), только стиль, английский
 ├── requirements.txt
 └── README.md
 ```
