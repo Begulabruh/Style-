@@ -1,0 +1,4 @@
+telethon>=1.34
+python-telegram-bot>=21
+qrcode[pil]
+python-socks[asyncio]
