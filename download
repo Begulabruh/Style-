@@ -1,0 +1,11 @@
+# Telegram-сессии и секреты: НЕ коммитить
+*.session
+*.session-journal
+.env
+qr.png
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
