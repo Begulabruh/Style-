@@ -37,6 +37,14 @@
 
 ---
 
+## ✦ Demo
+
+<p align="center">
+  <img src="demo.gif" alt="Style Userbot demo: type a message and see it transformed" width="720" />
+</p>
+
+---
+
 ## ✦ Содержание
 
 - [Возможности](#-возможности)
