@@ -33,14 +33,13 @@
 
 Никаких нейросетей, API-ключей и расходов на токены. Всё работает локально по заданным правилам: замена слов, регулярные выражения и немного случайности.
 
-> **EN:** A Telethon-based Telegram userbot that rewrites your own outgoing messages in a chosen style (femboy, yandere, tsundere, gopnik, depressive, business). Russian-language text only. Rule-based, no AI/API keys required.
+> **EN:** A Telethon-based Telegram userbot that rewrites your own outgoing messages in a chosen style (femboy, yandere, tsundere, gopnik, depressive, business, gremlin, formal, uwu). Russian-language text only. Rule-based, no AI/API keys required.
 
 ---
 
 ## ✦ Содержание
 
 - [Возможности](#-возможности)
-- [Команды](#-команды)
 - [Структура проекта](#-структура-проекта)
 - [Установка](#-установка)
 - [Вход по QR-коду](#-вход-по-qr-коду)
@@ -48,7 +47,7 @@
 - [Обычные Telegram-боты](#-версии-с-обычным-ботом)
 - [Безопасность](#-безопасность)
 - [Дисклеймер](#-дисклеймер)
-- [Настройка стилей](#-настройка-стиля)
+- [Настройка стилей](#-настройка-стилей)
 
 ---
 
@@ -66,6 +65,9 @@
 | 🧢 Гопник | `.gopnik` | здарова! купи газява и хрумки, в натуре |
 | 🌧️ Депрессивный | `.depressive` | привет... ну... нормально, наверное... |
 | 💼 Деловой | `.business` | Добрый день. Прошу подтвердить. |
+| 😈 Хаотичный | `.gremlin` | ЧТО ТЫ ДЕЛАЕШЬ АХАХАХА >:D |
+| 🎩 Сверхофициальный | `.formal` | Здравствуйте. Рад приветствовать вас. |
+| 🌸 Анимешный | `.uwu` | я тя поняль uwu 👉👈 |
 
 ### Дополнительные команды
 
@@ -95,19 +97,19 @@
 ```text
 Style-/
 │
-├── style_userbot_proxy.py   # Юзербот с поддержкой MTProto-прокси
-├── style_core_ru.py         # Логика всех стилей
+├── style_userbot.py         # Юзербот (прокси необязателен)
+├── style_core.py            # Логика всех стилей
 ├── qr_login.py              # Вход по QR-коду
 │
 ├── style_bot_ru.py          # Обычный бот (RU)
-├── style_bot.py             # Обычный бот (EN)
+├── style_bot_en.py          # Обычный бот (EN)
 │
 ├── requirements.txt
 └── README.md
 ```
 
 > [!IMPORTANT]
-> `style_userbot_proxy.py` и `style_core_ru.py` должны находиться в одной папке.
+> `style_userbot.py` и `style_core.py` должны находиться в одной папке.
 
 ---
 
@@ -136,28 +138,28 @@ pip install -r requirements.txt
 
 ### 03. Настройка API
 
-Открой `style_userbot_proxy.py` и впиши свои данные:
+Открой `style_userbot.py` и впиши свои данные:
 
 ```python
 API_ID = 12345678
 API_HASH = "твой_api_hash"
 ```
 
-### 04. Настройка прокси
+Либо задай переменные окружения `API_ID` и `API_HASH`.
 
-Если Telegram работает без прокси, удали блоки с `connection=` и `proxy=` и оставь обычное подключение:
+### 04. Настройка прокси (необязательно)
 
-```python
-client = TelegramClient("style", API_ID, API_HASH)
-```
+Если Telegram работает без прокси, **ничего менять не нужно**: оставь `PROXY_HOST` пустым, и скрипт подключится напрямую.
 
 Для MTProto-прокси укажи:
 
 ```python
-PROXY_HOST = ""
-PROXY_PORT = 1080
+PROXY_HOST = "адрес_прокси"
+PROXY_PORT = 443
 PROXY_SECRET = "секрет_из_32_символов"
 ```
+
+Эти значения тоже можно задать переменными окружения: `PROXY_HOST`, `PROXY_PORT`, `PROXY_SECRET`.
 
 **Обрати внимание:**
 - Секрет должен быть из 32 символов.
@@ -168,12 +170,12 @@ PROXY_SECRET = "секрет_из_32_символов"
 ### 05. Запуск
 
 ```bash
-python style_userbot_proxy.py
+python style_userbot.py
 ```
 
 При первом запуске введи **свой номер телефона**, а не токен бота, и код из Telegram.
 
-В папке появится файл `femboy.session`.
+В папке появится файл `style.session`.
 
 ---
 
@@ -201,7 +203,7 @@ python qr_login.py
 
 Наведи камеру на QR-код.
 
-Скрипт использует настройки API и прокси из `style_userbot_proxy.py`.
+Скрипт использует настройки API и прокси из `style_userbot.py`.
 
 ---
 
@@ -210,10 +212,10 @@ python qr_login.py
 | Проблема | Решение |
 |:--|:--|
 | `Впиши свои API_ID и API_HASH` | Данные не вписаны или файл не сохранён |
-| `TimeoutError` / `Server closed the connection` | Telegram недоступен: настрой подключение или прокси |
-| Команды ничего не делают | Скрипт вошёл как бот вместо пользователя. Удали `femboy.session` и войди по номеру |
+| `TimeoutError` / `Server closed the connection` | Telegram недоступен: включи VPN на всём устройстве или настрой прокси |
+| Команды ничего не делают | Скрипт вошёл как бот вместо пользователя. Удали `style.session` и войди по номеру |
 | `database is locked` / `AuthKeyDuplicatedError` | Один файл `.session` используется несколькими запущенными скриптами. Смени имя сессии в `TelegramClient("...")` |
-| `ModuleNotFoundError: style_core_ru` | Файлы лежат в разных папках |
+| `ModuleNotFoundError: style_core` | Файлы лежат в разных папках или названы по-другому |
 | Код не приходит | Проверь чат «Telegram» внутри приложения или используй `qr_login.py` |
 
 ---
@@ -224,7 +226,7 @@ python qr_login.py
 
 | Файл | Язык |
 |:--|:--|
-| `style_bot.py` | English |
+| `style_bot_en.py` | English |
 | `style_bot_ru.py` | Русский |
 
 Они работают через токен от [@BotFather](https://t.me/BotFather).
@@ -258,7 +260,7 @@ python style_bot_ru.py
 - Секреты прокси
 - QR-коды и коды авторизации
 
-Перед `git push` проверь, что в `style_userbot_proxy.py` стоят заглушки вместо личных данных.
+Перед `git push` проверь, что в `style_userbot.py` стоят заглушки вместо личных данных.
 
 Если токен или ключ попали в публичный репозиторий:
 1. Пересоздай токен бота через `/revoke` в @BotFather.
@@ -281,9 +283,9 @@ python style_bot_ru.py
 
 ---
 
-## ✦ Настройка стиля
+## ✦ Настройка стилей
 
-Все фразы и вероятности находятся в `style_core_ru.py`.
+Все фразы и вероятности находятся в `style_core.py`.
 
 | Переменная | Назначение |
 |:--|:--|
@@ -295,6 +297,9 @@ python style_bot_ru.py
 | `SWAPS` | Основные замены слов |
 | `GOPNIK_SWAPS` | Замены для гопник-стиля |
 | `BUSINESS_SWAPS` | Замены для делового стиля |
+| `FORMAL_SWAPS` | Замены для сверхофициального стиля |
+| `UWU_SWAPS` | Замены для анимешного стиля |
+| `GREMLIN_END` | Концовки хаотичного стиля |
 | `YANDERE_END` | Концовки яндере-стиля |
 | `TSUNDERE_END` | Концовки цундере-стиля |
 | `DEPRESSIVE_END` | Концовки депрессивного стиля |
