@@ -33,15 +33,7 @@
 
 Никаких нейросетей, API-ключей и расходов на токены. Всё работает локально по заданным правилам: замена слов, регулярные выражения и немного случайности.
 
-> **EN:** A Telethon-based Telegram userbot that rewrites your own outgoing messages in a chosen style (femboy, yandere, tsundere, gopnik, depressive, business, gremlin, formal, uwu). Russian-language text only. Rule-based, no AI/API keys required.
-
----
-
-## ✦ Demo
-
-<p align="center">
-  <img src="demo-tiny.gif" alt="Style Userbot demo: type a message and see it transformed" width="720" />
-</p>
+> **EN:** A Telethon-based Telegram userbot that rewrites your own outgoing messages in a chosen style (femboy, yandere, tsundere, gopnik, depressive, business, gremlin, formal, uwu, static, glitch, oldpc). Russian-language text only. Rule-based, no AI/API keys required.
 
 ---
 
@@ -76,6 +68,9 @@
 | 😈 Хаотичный | `.gremlin` | ЧТО ТЫ ДЕЛАЕШЬ АХАХАХА >:D |
 | 🎩 Сверхофициальный | `.formal` | Здравствуйте. Рад приветствовать вас. |
 | 🌸 Анимешный | `.uwu` | я тя поняль uwu 👉👈 |
+| 📺 Помехи | `.static` | кₐк дₑлₐ? ░▒▓ .. |
+| 👾 Глитч | `.glitch` | пппприиивеет... ошиbка_404 |
+| 🖥️ Старый компьютер | `.oldpc` | C:\\USER> привет_ |
 
 ### Дополнительные команды
 
@@ -308,6 +303,9 @@ python style_bot_ru.py
 | `FORMAL_SWAPS` | Замены для сверхофициального стиля |
 | `UWU_SWAPS` | Замены для анимешного стиля |
 | `GREMLIN_END` | Концовки хаотичного стиля |
+| `STATIC_END` | Помехи в конце сообщения (стиль static) |
+| `GLITCH_END` | Концовки глитч-стиля |
+| `OLDPC_PREFIXES` | Приглашения командной строки (стиль oldpc) |
 | `YANDERE_END` | Концовки яндере-стиля |
 | `TSUNDERE_END` | Концовки цундере-стиля |
 | `DEPRESSIVE_END` | Концовки депрессивного стиля |
